@@ -14,26 +14,26 @@
   3. Organizando o código: Files and Folders
   4. Conteúdo (Homework)
     1. Carregando o framework
-    2. Basic Built-in Directives: ng-app, ng-controller, ng-repeat, ng-src, ng-model
-    3. Basic Built-in Filters: currency, limitTo, filter, orderBy
-    4. Two-way Data Binding
+    2. Modules
+    3. Controllers
+    4. Basic Built-in Directives: ng-app, ng-controller, ng-repeat, ng-src, ng-init, ng-model
+    5. Basic Built-in Filters: currency, limitTo, filter, orderBy
 2. Dia 2
-  1. Exercicio: Aplicar Basic Built-in Directives, Basic Built-in Filters e o Two-way Data Binding no projeto E-commerce.
+  1. Exercicio: Aplicar Modules, Controllers, Basic Built-in Directives e Basic Built-in Filters no projeto E-commerce.
   2. Conteúdo (Homework)
-    1. Modules
     2. Routes
     3. Views
-    4. Controllers
+    4. Two-way Data Binding
 3. Dia 3
-  1. Exercicio: Aplicar Modules, Routes, Views e Controllers no projeto E-commerce.
+  1. Exercicio: Aplicar Routes, Views e o Two-way Data Binding no projeto E-commerce.
   2. Conteúdo (Homework)
     1. Basic Built-in Services
 	  1. Comunicando com o servidor
 		1. $http
 	    2. $resource
 	    3. $routeParams
-	2. Promises
-	  1. $q
+	  2. Promises
+	    1. $q
 	2. Dependency Injection (Injeção de dependência)
 4. Dia 4 (Modularizando)
   1. Exercicio: Aplicar Basic Built-in Services, Promises e Dependency Injection no projeto E-commerce.
