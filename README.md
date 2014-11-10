@@ -65,7 +65,7 @@
 		- [Karma Test Runner](http://karma-runner.github.io/0.10/intro/configuration.html)
 		- [AngularJs Unit Testing](http://quickleft.com/blog/angularjs-unit-testing-for-real-though)	
 		- [Unit Testing Directives - Revolunet](http://blog.revolunet.com/blog/2013/12/05/unit-testing-angularjs-directive/)
-		- [Unit and e2e Testing in Agnular - Sitepoint](http://www.sitepoint.com/unit-and-e2e-testing-in-angularjs/)
+		- [Unit and e2e Testing in AngularJs - Sitepoint](http://www.sitepoint.com/unit-and-e2e-testing-in-angularjs/)
 		- [Testing with Angular - Year of moo](http://www.yearofmoo.com/2013/01/full-spectrum-testing-with-angularjs-and-karma.html)
 		- [Unit testing best practices](http://andyshora.com/unit-testing-best-practices-angularjs.html)
     	- [Debugando AngularJs no Console](http://ionicframework.com/blog/angularjs-console/)
