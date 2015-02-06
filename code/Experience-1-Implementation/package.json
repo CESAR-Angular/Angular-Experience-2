@@ -1,0 +1,10 @@
+{
+    "name"         : "Angular-Experience",
+    "version"      : "1.0.0",
+    "description"  : "CESAR Angular Experience",
+    "main"         : "server.js",
+    "author"       : "Francisco",
+    "dependencies" : {
+        "express"    : "~3.4.4"
+    }
+}

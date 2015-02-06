@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Angular Commerce</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/site.css"/>
+</head>
+<body ng-controller="cartController as cart">
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-6 logo">
+                <a href="/">AngularJS Commerce</a>
+            </div>
+            <div class="col-md-8 col-xs-6 text-right">
+                <cart-summary />
+            </div>
+        </div>
+    </div>
+</header>
+<div class="body-container">
+    <div class="container">
+        <ng-view />
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-6 text-left">AngularJS Commerce - All Rights Reserved</div>
+            <div class="col-md-6 col-xs-6 text-right">
+                <cart-summary />
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/angular.js"></script>
+<script src="js/angular-resource.js"></script>
+<script src="js/angular-locale_pt-br.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="app/data.js"></script>
+<script src="app/app.js"></script>
+<script src="app/products/productDataService.js"></script>
+<script src="app/products/productController.js"></script>
+<script src="app/products/productFilter.js"></script>
+<script src="app/cart/cartService.js"></script>
+<script src="app/cart/cartController.js"></script>
+<script src="app/cart/cart-summary.js"></script>
+</body>
+</html>
+

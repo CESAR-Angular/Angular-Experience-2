@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ANGULAR JS</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Gileno Oliveira">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <link rel="stylesheet" href="css/site.css">
+
+        
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+				    <h1>AngularJS Experience</h1>
+                    <hr/>
+				    <p><small>Superheroic Javascript MVW Framework</small></p>
+				</section>
+
+                <section>
+                    <h2>Custom Directives</h2>
+                    <ul>
+                        <li>DRY - Don't Repeat Yourself</li>
+                        <li>HTML com significado</li>
+                        <li>Widget</li>
+                        <li>Manipular HTML DOM</li>
+                        <li>Prefix</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Custom Directives</h2>
+                    <h4>Código</h4>
+                    <pre><code>
+angular.module('app').directive('myDirective', function() {
+    return {
+        restrict: 'E', //'A', 'E', 'C'
+        template: '<h4>Hello World {{ ctrl.name }}</h4>',
+        //templateUrl: '/app/mytemplate.html',
+        replace: true,
+        scope: true //false, object literal
+    };
+});
+
+//VIEW
+<div>
+    <my-directive></my-directive>
+    <div my-directive></div>
+    <div class="my-directive"></div>
+</div>
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Custom Directives</h2>
+                    <h4>Batarang</h4>
+                </section>
+
+                <section>
+                    <h2>Custom Filters</h2>
+                    <h4>Como criar seus próprios filters?</h4>
+                </section>
+
+                <section>
+                	<h2>Sintaxe de um custom filter</h2>
+                	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
+                	<pre><code>angular.module('app').filter('axFormatDate', function() {
+  return function(input) {
+     if (typeof moment === 'function') { 
+        if( typeof input !== 'undefined' && moment(input).isValid() ) {
+           input = moment(input).format('MM/DD/YYYY [at] h:mm A');
+        }
+     }
+     return input;
+  };
+})</code></pre>
+                </section>
+
+				<section>
+					<h2>Sintaxe de um custom filter</h2>
+                	<p>No html:</p>
+					<pre><code>&lt;article>
+   &lt;h1>{{ article.title }}&lt;/h1>
+   &lt;time>{{ article.date | axFormatDate }}&lt;/time>
+&lt;/article>
+</code></pre>
+				</section>
+
+
+                <section>
+                	<h2>Recebendo parâmetros</h2>
+                	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
+                	<pre><code>angular.module('app').filter('axFormatDate', function() {
+  return function(input, stringFormat) {
+     if (typeof moment === 'function') { 
+        if( typeof input !== 'undefined' && moment(input).isValid() ) {
+           input = moment(input).format( stringFormat );
+        }
+     }
+     return input;
+  };
+})</code></pre>
+                </section>
+
+                <section>
+					<h2>Recebendo parâmetros</h2>
+                	<p>No html:</p>
+					<pre><code>&lt;article>
+   &lt;h1>{{ article.title }}&lt;/h1>
+   &lt;time>{{ article.date | axFormatDate:'MM/DD/YYYY [at] h:mm A' }}&lt;/time>
+&lt;/article>
+</code></pre>
+				</section>
+
+				 <section>
+				 	<p>Um pouco mais avançado...</p>
+					<h2>Custom filters para listagens</h2>
+				</section>
+
+				<section>
+					<h2>Custom filters para listagens</h2>
+<pre><code>app.filter('axListFilter', function($filter) {
+  return function( list, filterSelected, textSearch ) {
+    var outputList = [];
+    
+    if ( filterSelected === 'reviewed' ){
+        angular.forEach(list, function(value, key){
+          var obj = value;
+          if(!obj.reviewed){
+             this.push(obj);
+          }
+        }, outputList);
+    }
+    
+    return $filter('filter')(outputList, textSearch);
+  };
+});
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Custom filters para listagens</h2>
+					<p>Html:</p>
+<pre><code>&lt;select ng-model="fltr.select" ng-options="sts.name for sts in status">
+&lt;/select>
+
+&lt;input type="text" ng-model="fltr.search">
+
+&lt;ul ng-repeat="item in items | axListFilter:fltr.select:fltr.search">
+   &lt;li>{{ item.name }}&lt;/li>
+&lt;/ul></code></pre>
+				</section>
+
+                <section>
+                    <h2>Testes com Protractor</h2>
+                    <h4>Como automatizar testes da sua aplicação AngularJS?</h4>
+                </section>
+
+                <section>
+                	<h2>Qual a proposta do Protractor?</h2>
+                	<p>É um framework de testes funcionais (End-to-end testing) escrito sobre o WebdriverJS (Selenium) que simula a navegação do usuário interagindo com o browser.</p>
+                </section>
+
+                <section>
+                	<h3>Por que Protractor?</h3>
+					<ul>
+						<li>Comunidade ativa (mesma equipe do Angular)</li>
+						<li>É fácil de aprender, sintaxe simplificada</li>
+						<li>Usa o jasmine. Torna-se familiar para quem já fez unit tests</li>
+						<li>Roda sobre o NodeJS. É possível turbinar seu teste utilizando outros pacotes npm.</li>
+					</ul>
+                </section>
+
+                <section>
+                    <h2 style="margin-bottom:50px">Arquitetura do Protractor</h2>
+
+					<p style="text-align: center">
+						<strong>Servidor de testes</strong> (NodeJS, Java, etc)
+					</p>
+					<p style="text-align: center">
+						|
+					</p>
+					<p style="text-align: center">
+						<strong>Webdriver</strong> (Selenium)
+					</p>
+					<p style="text-align: center">
+						|
+					</p>
+					<p style="text-align: center">
+						<strong>Aplicação AngularJS</strong>
+					</p>
+                </section>
+
+                <section>
+                	<h2>Protractor: como usá-lo?</h2>
+                	<p>Comece pelo arquivo de configuração</p>
+                	<pre><code>exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  capabilities: {
+    'browserName': 'chrome'
+  },
+
+  specs: ['example-spec.js'],
+
+  jasmineNodeOpts: {
+    showColors: true
+  }
+};
+</code></pre>
+                </section>
+
+                <section>
+                	<h2>Protractor: variáveis globais</h2>
+                	<ul>
+						<li><strong><code>browser</code></strong><br> <code>browser.get()</code></li>
+						<li><strong><code>element</code> + <code>by</code></strong><br><code>element(by.model('yourName'))</code></li>
+						<li><strong><code>protractor</code></strong><br> <code>protractor.Key</code></li>
+					</ul>
+                </section>
+
+                <section>
+                	<h2>Protractor: vamos rodar este exemplo?</h2>
+<pre><code style="font-size:20px;line-height:1em">// example-spec.js
+describe('angularjs homepage', function() {
+  it('should greet the named user', function() {
+    browser.get('http://www.angularjs.org');
+
+    element(by.model('yourName')).sendKeys('Julie');
+
+    var greeting = element(by.binding('yourName'));
+
+    expect(greeting.getText()).toEqual('Hello Julie!');
+  });
+});
+</code></pre>
+                </section>
+
+                <section>
+					<h2 style="font-size:1.5em;"><code>element()</code> vs <code>element.all()</code></h2>
+					<p>Único elemento</p>
+					<pre class="mb-30"><code>element( by.binding('appName') );</code></pre>
+					<p>Coleção de elementos</p>
+					<pre><code>// clicks the 3th element
+element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
+				</section>
+
+				<section>
+					<h2><code>by.binding</code></h2>
+					<h3 style="font-size:1em">No teste</h3>
+					<pre class="mb-30"><code>element( by.binding('myModel') );</code></pre>
+					<h3 style="font-size:1em">Na aplicação (html)</h3>
+					<pre><code>&lt;span ng-bind="myModel">&lt;/span>
+&lt;!-- or -->
+&lt;span>{{myModel}}&lt;/span>
+</code></pre>
+				</section>
+
+				<section>
+					<h2><code>by.model</code></h2>
+					<h3 style="font-size:1em">No teste</h3>
+					<pre class="mb-30"><code>element( by.model('myModel') );</code></pre>
+					<h3 style="font-size:1em">Na aplicação (html)</h3>
+					<pre><code>&lt;input ng-model="myModel" /></code></pre>
+				</section>
+				<section>
+					<h2><code>by.repeater</code></h2>
+					<h3 style="font-size:1em">No teste</h3>
+					<pre class="mb-30"><code>element( by.repeater('user in users').row(0).column('name') );</code></pre>
+					<h3 style="font-size:1em">Na aplicação (html)</h3>
+					<pre><code>&lt;ul>
+  &lt;li ng-repeat="user in users">
+      &lt;span>{{user.name}}&lt;/span>
+  &lt;/li>
+&lt;/ul></code></pre>
+				</section>
+
+				<section>
+					<h2><code>by.css</code></h2>
+					<h3 style="font-size:1em">No teste</h3>
+					<pre class="mb-30"><code>element( by.css('[ng-click="sendMail()"]') );</code></pre>
+					<h3 style="font-size:1em">Na aplicação (html)</h3>
+					<pre><code>&lt;button ng-click="sendMail()">Send mail!&lt;/button></code></pre>
+				</section>
+
+				<section>
+					<h2 style="font-size: 1.8em">E não acaba por aí...</h2>
+					<ul>
+						<li><code>by.select()</code></li>
+						<li><code>by.partialButtonText()</code></li>
+						<li><code>elementArrayFinder.each()</code></li>
+						<li>
+							<a href="https://github.com/angular/protractor/blob/master/docs/api.md">
+								Confira a API completa
+							</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2 style="margin-bottom: 50px">Boas práticas no uso do <code>element</code></h2>
+					<p>Tire proveito dos atributos específicos do AngularJS, ex.: <code>by.model</code>, <code>by.repeater</code>, etc.</p>
+					<p style="font-size: 60px"><strong>Evite Classes e IDs!</strong></p>
+				</section>
+
+				<section>
+					<h2>Leitura complementar</h2>
+					<ul>
+						<li>Documentação oficial:<br>
+							<a href="https://github.com/angular/protractor">https://github.com/angular/protractor</a>
+						</li>
+						<li>Protractor passo-a-passo:<br>
+							<a href="http://ramonvictor.github.io/protractor/slides/">http://ramonvictor.github.io/protractor/slides/</a>
+						</li>
+					</ul>
+				</section>
+
+				<!-- /fim protractor -->
+
+			
+                <section>
+                    <h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Download dia 2</h4>
+                    <p>git clone https://github.com/CGUGileno/AngularJS-Experience2-Implementation.git</p>
+                </section>
+
+                 <section>
+                    <h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Download do Protractor</h4>
+                    <ol>
+						<li>
+							Download Node.JS
+						</li>
+						<li><code>sudo npm install protractor -g</code></li>
+						<li><code>sudo webdriver-manager update</code></li>
+					</ol>
+                </section>
+
+                <section>
+                    <h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Tasks</h4>
+                    <ol style="font-size: 18pt;">
+                        <li>
+                            <strong>Criar uma custom directive: cart-summary</strong>
+                            <p>Em vez de repetir o mesmo código do resumo do carrinho (botão superior e inferior), gostariamos de isolar este código em uma custom-directive.</p>
+                            <p>O código deveria apenas se referir a: <pre><code><ax-cart-summary /></code></pre></p>
+                        </li>
+					</ol>
+				</section>
+
+				 <section>
+                    <h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Tasks</h4>
+                    <ol style="font-size: 18pt;" start="2">
+                        <li><strong>Adicione um campo de busca para filtrar a lista de produtos</strong>
+                            <ul>
+                                <li>Considere que o usuário além de escolher a categoria e ordenar, ele gostaria de digitar também o nome do produto para chegar mais rapidamente a seu objetivo.</li>
+                                <li>A lista só deve ser filtrada depois do usuário digitar ao menos três caracteres.</li>
+                            </ul>
+                        </li>
+                  </ol>
+                </section>
+
+                <section>
+                    <h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Tasks</h4>
+                    <ol style="font-size: 18pt;" start="3">
+                        <li><strong>Valide os seguintes cenários de teste usando Protractor</strong>
+                            <ul>
+                                <li>Quando clico no botão "Add to Cart" no primeiro e no último item visível na home, espero que o total de itens exibido no botão de acesso ao carrinho seja <strong>2</strong> e mostre após o "Total:" o valor correspondente ao <strong>somatório dos itens adicionados</strong>. <br>
+                                	<strong>Atenção</strong>: os testes devem continuar funcionando mesmo que os dados da lista de produtos se iniciem em outra ordenação.
+                                </li>
+                                
+                            </ul>
+                        </li>
+                   </ol>
+                </section>
+                <section>
+					<h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Tasks</h4>
+					<ol style="font-size: 18pt;" start="3">
+					<li>Continuando a partir do teste anterior, quando clico no botão azul sigo para de resumo da compra. A quantidade de itens listados deve ser igual a <strong>2</strong>.
+                                </li>
+					</ol>
+				</section>
+				<section>
+					<h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Tasks</h4>
+					<ol style="font-size: 18pt;" start="3">
+					<li>Para fechar o fluxo do teste, o usuário deseja zerar o valor dos produtos adicionados e verificar se o total mostra: <strong>"R$0,00"</strong>. Em seguida ele clica na marca "AngularJS Commerce" e espera ser direcionado para a <strong>home da aplicação</strong>.</li>
+					</ol>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
+

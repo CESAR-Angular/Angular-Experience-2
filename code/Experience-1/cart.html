@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular Commerce</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/site.css"/>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-6 logo">
+                <a href="/">AngularJS Commerce</a>
+            </div>
+            <div class="col-md-8 col-xs-6 text-right">
+                <a class="btn btn-lg btn-primary" href="/cart.html">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                    Items: 0 | Total: R$ 0,00
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="body-container">
+    <div class="container">
+        <h1>Cart</h1>
+        <table class="table table-responsive table-striped cart">
+            <tr>
+                <th colspan="2">Product</th>
+                <th class="text-right">Price</th>
+                <th>Quantity</th>
+                <th class="text-right">Line Total</th>
+                <th class="text-right"></th>
+            </tr>
+            <tr>
+                <td class="cart-product-image">
+                    <img src="http://ecx.images-amazon.com/images/I/41E0YyTaNtL._SL300_.jpg" alt=""/>
+                </td>
+                <td>Apple iPad mini (16GB, Wi-Fi, White / Silver)</td>
+                <td class="text-right">R$ 300,00</td>
+                <td><input type="number" class="form-control input-sm" value="1"/></td>
+                <td class="text-right">R$ 300,00</td>
+                <td class="text-right">
+                    <button class="close">&times;</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="cart-product-image">
+                    <img src="http://ecx.images-amazon.com/images/I/41E0YyTaNtL._SL300_.jpg" alt=""/>
+                </td>
+                <td>Apple iPad mini (16GB, Wi-Fi, White / Silver)</td>
+                <td class="text-right">R$ 300,00</td>
+                <td><input type="number" class="form-control input-sm" value="1"/></td>
+                <td class="text-right">R$ 300,00</td>
+                <td class="text-right">
+                    <button class="close">&times;</button>
+                </td>
+            </tr>
+        </table>
+        <div class="well pull-right">
+            TOTAL: R$ 600,00
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-6 text-left">AngularJS Commerce - All Rights Reserved</div>
+            <div class="col-md-6 col-xs-6 text-right">
+                <a class="btn btn-lg btn-primary" href="/cart.html">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                    Items: 0 | Total: R$ 0,00
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+

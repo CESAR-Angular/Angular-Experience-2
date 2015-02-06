@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Angular Commerce</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/site.css"/>
+</head>
+<body ng-controller="cartController as cart">
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-6 logo">
+                <a href="/">AngularJS Commerce</a>
+            </div>
+            <div class="col-md-8 col-xs-6 text-right">
+                <a class="btn btn-lg btn-primary" href="/cart.html">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                    Items: {{ cart.getNumberOfItems() }} | Total: {{ cart.getTotal() | currency }}
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="body-container">
+    <div class="container" ng-controller="productController as products">
+        <div class="row filters-and-sorts">
+            <div class="col-md-6 col-xs-6">
+                Filter by:
+                <ul class="list-inline">
+                    <li ng-class="{'selected': categoryFilter.category == undefined}"><a href="#" ng-click="categoryFilter = {category: undefined}">No Filter</a></li>
+                    <li ng-class="{'selected': categoryFilter.category == 'Smartphones'}"><a href="#" ng-click="categoryFilter = {category: 'Smartphones'}">Smartphones</a></li>
+                    <li ng-class="{'selected': categoryFilter.category == 'Laptops and Tablets'}"><a href="#" ng-click="categoryFilter = {category: 'Laptops and Tablets'}">Laptops and Tablets</a></li>
+                    <li ng-class="{'selected': categoryFilter.category == 'Books'}"><a href="#" ng-click="categoryFilter = {category: 'Books'}">Books</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-xs-6 text-right">
+                Sort by:
+                <ul class="list-inline">
+                    <li ng-class="{'selected': predicate == 'price'}"><a href="#" ng-click="predicate = 'price'; reverse = false">Best Price</a></li>
+                    <li ng-class="{'selected': predicate == 'name'}"><a href="#" ng-click="predicate = 'name'; reverse = false">Name</a></li>
+                </ul>
+            </div>
+        </div>
+        <ul class="row list-inline">
+            <li class="col-md-3 col-sm-6 product-item" ng-repeat="product in products.getProducts() | filter:categoryFilter | orderBy: predicate:reverse">
+                <div class="product-photo text-center">
+                    <img alt="{{ product.name }}" ng-src="{{ product.photoUrl }}"/>
+                </div>
+                <div>
+                    {{ product.name }}
+                </div>
+                <div class="product-price">
+                    {{ product.price | currency }}
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-lg btn-success" ng-click="cart.addItem(product)">
+                        <i class="glyphicon glyphicon-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-6 text-left">AngularJS Commerce - All Rights Reserved</div>
+            <div class="col-md-6 col-xs-6 text-right">
+                <a class="btn btn-lg btn-primary" href="/cart.html">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                    Items: {{ cart.getNumberOfItems() }} | Total: {{ cart.getTotal() | currency }}
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/angular.js"></script>
+<script src="js/angular-locale_pt-br.js"></script>
+<script src="app/data.js"></script>
+<script src="app/app.js"></script>
+<script src="app/products/productController.js"></script>
+<script src="app/cart/cartController.js"></script>
+
+</body>
+</html>
+
