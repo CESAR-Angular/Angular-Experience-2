@@ -9,7 +9,7 @@
     3. Objetivo
   2. Por que Angular?
     1. Componentes
-  3. Conteúdo (Homework)
+  3. Conteúdo
     1. Carregando o framework
     2. Modules
     3. Controllers
