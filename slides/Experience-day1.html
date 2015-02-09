@@ -73,10 +73,231 @@
 
 
                 <section>
-                    <h2>Intro JS</h2>
-                    <p>Karla vai introduzir o conteúdo aqui</p>
+                    <h2>Introdução ao <b>JavaScript</b></h2>
+                    <ul class="block">
+                        <li>Tipos de dados</li>
+                        <li>O literal Object</li>
+                        <li>Funções</li>
+                        <li>Escopo</li>
+                        <li>Closure</li>
+                        <li>Callbacks</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Tipos de dados</h2>
+                    
+                    <p>Fracamente tipada ou dinâmica. </p><p>Tem seis tipos de dados primitivos:</p>
+                    
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Null">Null</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Undefined">Undefined</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol (ECMAScript 6)</a></li>
+                    </ul>
+                    <p>e <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Object</a></p>
+                </section>
+                <section>
+                    <h2>O literal <b>Object</b></h2>
+                    <p>Um objeto literal é um par de chaves que cercam zero ou mais pares no formato 
+                        <b>nome: valor</b> 
+                        separados por <b>[ , ]</b>.
+                    </p>
+                </section>
+                <section>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 16px; margin-top: 20px;" class="js">
+                         var empty_object = {};
+                    </code></pre>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 16px; margin-top: 20px;" class="js">
+                        var stooge = {
+                            "first-name": "Jerome",
+                            "last-name": "Howard"
+                        };
+                    </code></pre>
+
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 16px; margin-top: 20px;" class="js">
+var flight = {
+    airline: "Oceanic",
+    number: 815,
+    departure: {
+        IATA: "SYD",
+        time: "2004-09-22 14:55",
+        city: "Sydney"
+    }, 
+    arrival: {
+        IATA: "LAX",
+        time: "2004-09-23 10:42",
+        city: "Los Angeles"
+    } 
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Recuperação</h2>
+                  <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs js">
+                         var empty_object = {};
+                    </code></pre>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs js">
+stooge["first-name"]
+flight.departure.IATA
+
+stooge["middle-name"]
+flight.status
+stooge["FIRST-NAME"]
+
+flight.equipment
+flight.equipment.model
+flight.equipment && flight.equipment.model
+                </code></pre>
+                </section>
+                <section>
+                    <h2>Atualização</h2>
+
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs js">
+stooge["first-name"] = "Jerome";
+
+stooge["middle-name"] = "Lester";
+
+stooge.nickname = "Curly";
+
+flight.equipment = {
+    model: "Boeing 777"
+};
+
+flight.status = "overdue";
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Atribuição</h2>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+var x = stooge;
+
+x.nickname = "Curly";
+
+var nick = stooge.nickname;
+    
+var a = {}, b = {}, c = {};
+    
+a = b = c = {};
+                    </code></pre>
                 </section>
 
+                <section>
+                    <h2>Funções</h2>
+                    <p>Funções em JavaScript são objetos.</p>
+                    <p>O que faz a função ser especial é que ela pode ser invocada.</p>
+                     <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+var add = function (a, b) { 
+    return a + b;
+};
+
+function add (a, b) {
+    return a + b;
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Chamada como Método</h2>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+var myObject = {
+    value: 0,
+    increment: function (inc) {
+        this.value += typeof inc === 'number' ? inc : 1;
+    } 
+};
+
+myObject.increment( ); 
+
+console.log(myObject.value);
+
+myObject.increment(2);
+
+console.log(myObject.value);
+                    </code></pre>
+
+                </section>
+                <section>
+                    <h2>Chamada como Global</h2>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+var sum = add(3, 4);
+
+myObject.double = function () {
+    var that = this;
+    var helper = function () {
+        that.value = add(that.value, that.value);
+    };
+    helper();
+};
+
+myObject.double(); 
+
+console.log(myObject.getValue());
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Argumentos</h2>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+var sum = function () {
+    var i, sum = 0;
+    for (i = 0; i < arguments.length; i += 1) {
+        sum += arguments[i];
+    }
+    return sum;
+};
+
+console.log(sum(4, 8, 15, 16, 23, 42));
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Escopo</h2>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+var foo = function () { 
+    var a = 3, b = 5;
+    var bar = function () { 
+        var b = 7, c = 11;
+        a += b + c;
+    };
+    bar();
+};
+
+                    </code></pre>
+                </section> 
+                <section>
+                    <h2>Closure</h2>
+                    <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+var myObject = function () { 
+    var value = 0;
+    return {
+        increment: function (inc) {
+            value += typeof inc === 'number' ? inc : 1;
+        },
+        getValue: function () { 
+            return value;
+        } 
+    };
+}( );
+                    </code></pre>
+                </section>
+                <section>
+                <h2>Callbacks</h2>
+                <p>Como lidar com eventos (geralmente assíncronos)</p>
+                <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+request = prepare_the_request();
+response = send_request_synchronously(request); 
+display(response);
+                </code></pre>
+                <p class="fragment"><b>Errado!</b></p>
+                
+                <pre class="fragment"><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="hljs">
+request = prepare_the_request();
+send_request_asynchronously(request, function (response) {
+    display(response);
+});
+                </code></pre>
+                <p class="fragment"><b>Certo.</b></p>
+                </section>
 
                 <section>
                     <h2>AngularJS - Histórico</h2>
