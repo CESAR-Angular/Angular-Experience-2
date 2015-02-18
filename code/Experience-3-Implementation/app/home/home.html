@@ -1,8 +1,8 @@
 <div class="row filters-and-sorts" style="margin-bottom: 30px">
     <div class="col-md-6 col-xs-6">
         Filter by:
-        <ul class="list-inline" ng-init="categoryFilter.category = 'undefined';">
-            <li ng-class="{'selected': categoryFilter.category == 'undefined' }"><a href="#" ng-click="categoryFilter = {category: 'undefined' }">No Filter</a></li>
+        <ul class="list-inline" ng-init="categoryFilter.category = undefined;">
+            <li ng-class="{'selected': categoryFilter.category == undefined }"><a href="#" ng-click="categoryFilter = {category: 'undefined' }">No Filter</a></li>
             <li ng-class="{'selected': categoryFilter.category == 'Smartphones'}"><a href="#" ng-click="categoryFilter = {category: 'Smartphones'}">Smartphones</a></li>
             <li ng-class="{'selected': categoryFilter.category == 'Laptops and Tablets'}"><a href="#" ng-click="categoryFilter = {category: 'Laptops and Tablets'}">Laptops and Tablets</a></li>
             <li ng-class="{'selected': categoryFilter.category == 'Books'}"><a href="#" ng-click="categoryFilter = {category: 'Books'}">Books</a></li>
@@ -16,16 +16,13 @@
         </ul>
     </div>
 </div>
-<div>
-    <input type="text" ng-model="textFilter" placeholder="Nome do produto" />
-</div>
 <ul class="row list-inline">
-    <li class="col-md-3 col-sm-6 product-item" ng-repeat="product in productVM.products | axFilter:categoryFilter:textFilter | orderBy: predicate:reverse">
+    <li class="col-md-3 col-sm-6 product-item" ng-repeat="product in productVM.products | filter:categoryFilter | orderBy: predicate:reverse">
         <div class="product-photo text-center">
             <img alt="{{ product.name }}" ng-src="{{ product.photoUrl }}"/>
         </div>
         <div>
-            {{ product.name }}
+            {{ product.name | limitWordTo: 5 }}
         </div>
         <div class="product-price">
             {{ product.price | currency }}
