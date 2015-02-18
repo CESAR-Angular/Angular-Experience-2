@@ -67,7 +67,7 @@ angular.module('app').directive('myDirective', function() {
         template: '<h4>Hello World {{ ctrl.name }}</h4>',
         //templateUrl: '/app/mytemplate.html',
         replace: true,
-        scope: true //false, object literal
+        scope: false //{ atributo: "="}
     };
 });
 
@@ -85,31 +85,16 @@ angular.module('app').directive('myDirective', function() {
                 </section>
 
                 <section>
-                    <h2>Custom Filters</h2>
-                    <h4>Como criar seus próprios filters?</h4>
-                </section>
-
-                <section>
-                	<h2>Sintaxe de um custom filter</h2>
-                	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
-                	<pre><code>angular.module('app').filter('axFormatDate', function() {
+                	<h2>Custom filters</h2>
+                	<p>Modificar conteúdo e/ou resultado de um item ou lista</p>
+                	<pre><code>angular.module('app').filter('toUpperCase', function() {
   return function(input) {
-     if (typeof moment === 'function') { 
-        if( typeof input !== 'undefined' && moment(input).isValid() ) {
-           input = moment(input).format('MM/DD/YYYY [at] h:mm A');
-        }
-     }
-     return input;
+     return input.toUpperCase();
   };
 })</code></pre>
-                </section>
-
-				<section>
-					<h2>Sintaxe de um custom filter</h2>
-                	<p>No html:</p>
+         	<p>No html:</p>
 					<pre><code>&lt;article>
-   &lt;h1>{{ article.title }}&lt;/h1>
-   &lt;time>{{ article.date | axFormatDate }}&lt;/time>
+   &lt;h1>{{ article.title | toUpperCase }}&lt;/time>
 &lt;/article>
 </code></pre>
 				</section>
@@ -117,65 +102,38 @@ angular.module('app').directive('myDirective', function() {
 
                 <section>
                 	<h2>Recebendo parâmetros</h2>
-                	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
-                	<pre><code>angular.module('app').filter('axFormatDate', function() {
-  return function(input, stringFormat) {
-     if (typeof moment === 'function') { 
-        if( typeof input !== 'undefined' && moment(input).isValid() ) {
-           input = moment(input).format( stringFormat );
-        }
-     }
-     return input;
+                	<pre><code>angular.module('app').filter('toUpperOrLowerCase', function() {
+  return function(input, flag) {
+    if (flag)
+      return input.toUpperCase();
+    else
+      return input.toLowerCase();
   };
 })</code></pre>
-                </section>
-
-                <section>
-					<h2>Recebendo parâmetros</h2>
-                	<p>No html:</p>
+         	<p>No html:</p>
 					<pre><code>&lt;article>
-   &lt;h1>{{ article.title }}&lt;/h1>
-   &lt;time>{{ article.date | axFormatDate:'MM/DD/YYYY [at] h:mm A' }}&lt;/time>
+   &lt;h1>{{ article.title | toUpperOrLowerCase:true }}&lt;/time>
 &lt;/article>
 </code></pre>
 				</section>
 
-				 <section>
-				 	<p>Um pouco mais avançado...</p>
-					<h2>Custom filters para listagens</h2>
-				</section>
-
 				<section>
 					<h2>Custom filters para listagens</h2>
-<pre><code>app.filter('axListFilter', function($filter) {
-  return function( list, filterSelected, textSearch ) {
-    var outputList = [];
-    
-    if ( filterSelected === 'reviewed' ){
-        angular.forEach(list, function(value, key){
-          var obj = value;
-          if(!obj.reviewed){
-             this.push(obj);
-          }
-        }, outputList);
+                	<pre><code>angular.module('app').filter('toUpperOrLowerCase', function() {
+  return function(items, flag) {
+    var i, result = [];
+    for(i = 0; i < items.length; i++) {
+      if (flag)
+        result.push(items[i].toUpperCase());
+      else
+        result.push(items[i].toLowerCase());
     }
-    
-    return $filter('filter')(outputList, textSearch);
+    return result;
   };
-});
-</code></pre>
-				</section>
-
-				<section>
-					<h2>Custom filters para listagens</h2>
+})</code></pre>
 					<p>Html:</p>
-<pre><code>&lt;select ng-model="fltr.select" ng-options="sts.name for sts in status">
-&lt;/select>
-
-&lt;input type="text" ng-model="fltr.search">
-
-&lt;ul ng-repeat="item in items | axListFilter:fltr.select:fltr.search">
-   &lt;li>{{ item.name }}&lt;/li>
+<pre><code>&lt;ul ng-repeat="item in items | toUpperOrLowerCase:false">
+   &lt;li>{{ item }}&lt;/li>
 &lt;/ul></code></pre>
 				</section>
 
